@@ -25,30 +25,27 @@ if __name__ == '__main__':
         [0, 0, 0]
     ]
 
-    imgs_path = [200]
 
 
-    num_processes = 2
+
 
     seq_time = []
     par_time = []
     par_time2 = []
-
+    imgs_path = [50, 100, 200, 300, 400, 500]
     for path in imgs_path:
 
         img = Image.open("img/" + str(path) + "x" + str(path)+ ".png")
-
         t0 = time()
         img2 = process_image(img, kernel_sharpen)
         t1 = time()
-        img3 = process_image_parallel(img, kernel_sharpen, num_processes)
+        img3 = process_image_parallel(img, kernel_sharpen, 2)
         t2 = time()
         img4 = process_image_parallel(img, kernel_sharpen, 8)
         t3 = time()
         seq_time.append(t1-t0)
         par_time.append(t2-t1)
         par_time2.append(t3-t2)
-        print(path, "done")
 
     plt.style.use('seaborn-darkgrid')
 
